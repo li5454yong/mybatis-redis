@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lxg.dao.LxgDao">
+	  <cache type="com.lxg.redis.RedisCache"/>
+	  
+	  <resultMap id="lxg" type="com.lxg.entity.TestEntity">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+	</resultMap>
+	
+	<update id="update" parameterType="map">
+	update lxg set name=#{name} where id=#{id}
+	</update>
+	
+	<insert id="save" parameterType="com.lxg.entity.TestEntity">
+	 insert into lxg (id,name) values(#{id},#{name})
+	</insert>
+	
+	<delete id="del" parameterType="map">
+	delete from lxg where id=#{id}
+	</delete>
+	
+	<select id="getLxg" resultMap="lxg">
+		select id,name from lxg
+	</select>
+</mapper> 
